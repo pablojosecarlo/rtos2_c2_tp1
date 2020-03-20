@@ -1,4 +1,4 @@
-examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/usbd_keyboard.o: \
+examples/c/app/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/usbd_keyboard.o: \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/usbd_keyboard.c \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/inc/usbd_keyboard.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/inc/lpc_app_usbd_cfg.h \
@@ -80,6 +80,7 @@ examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/d
  libs/lpc_open/lpc_chip_43xx/inc/i2cm_18xx_43xx.h \
  libs/lpc_open/boards/edu_ciaa_nxp/inc/board.h \
  libs/lpc_open/boards/inc/board_api.h \
+ libs/sapi/sapi_v0.5.2/board/inc/sapi_boards.h \
  libs/sapi/sapi_v0.5.2/board/inc/sapi_peripheral_map.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/inc/sapi_gpio.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/inc/usbd_keyboard_endpoints.h

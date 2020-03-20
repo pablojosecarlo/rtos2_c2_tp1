@@ -1,4 +1,4 @@
-examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/src/sapi_adc.o: \
+examples/c/app/out/libs/sapi/sapi_v0.5.2/soc/peripherals/src/sapi_adc.o: \
  libs/sapi/sapi_v0.5.2/soc/peripherals/src/sapi_adc.c \
  libs/sapi/sapi_v0.5.2/soc/peripherals/inc/sapi_adc.h \
  libs/sapi/sapi_v0.5.2/base/inc/sapi_datatypes.h \
@@ -65,4 +65,5 @@ examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/src/s
  libs/lpc_open/boards/edu_ciaa_nxp/inc/board.h \
  libs/lpc_open/boards/inc/board_api.h \
  libs/lpc_open/lpc_chip_43xx/inc/lpc_types.h \
+ libs/sapi/sapi_v0.5.2/board/inc/sapi_boards.h \
  libs/sapi/sapi_v0.5.2/board/inc/sapi_peripheral_map.h

@@ -29,7 +29,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * Date: 2019-X-14
+ * Date: 2020-III-19
  */
 
 /*==================[inclusions]=============================================*/
@@ -41,7 +41,7 @@
 // sAPI
 #include "sapi.h"
 // otros includes
-#include "qmpool_Original.h"
+#include "qmpool2.h"
 #include "c2_tp1.h"
 #include "leds.h"
 #include "keysMef.h"
@@ -65,7 +65,7 @@ DEBUG_PRINT_ENABLE;
 //	void initKeysMef( int, ... ); 	//inicialización de la Keys-Mef
 //	void updKeysMef( void );  		//update de la Keys-Mef
 
-/*==================[start of original code]=================================*/
+/*==================[Declaraciones de Handlers asociados al FreeRTOS]========*/
 
 TaskHandle_t updKeysMef_Handle = NULL;
 TaskHandle_t myTaskLedPeriodicoHandle = NULL;
@@ -73,13 +73,16 @@ TaskHandle_t myTaskToTextUARTHandle = NULL;
 
 QueueHandle_t myQueueCommandHandle = NULL;
 
+/*==================[Declaraciones y variables asociadas al Quantum Leaps Mem Pool]=========*/
 
-/*==================[Declaraciones y variables asociadas al Quantum Leaps]=========*/
 QMPool miMemPool1;
-uint8_t memPoolSto1[10*40]; // 10 bloques de 40 bytes
+uint8_t memPoolSto1[10*5]; // 10 bloques de 5 bytes
 
 /*==================[Declaraciones y variables asociadas al Objeto Led]=========*/
+
 Led led1, led2; /* multiples instancias de Led */
+
+/*==================[start of original code]=================================*/
 
 /* FUNCION PRINCIPAL, PUNTO DE ENTRADA AL PROGRAMA LUEGO DE RESET. */
 int main(void){
@@ -88,21 +91,21 @@ int main(void){
 
    /* Inicializar la placa */
    boardConfig();
-   // Pool de memoria Quantum Leaps
 
+   // Inicializar Pool de memoria Quantum Leaps
    QMPool_init(&miMemPool1,
                memPoolSto1,
                sizeof(memPoolSto1),
                5U);  /* bloques 5 bytes cada uno */
 
-   // UART for debug messages
+   // Inicializar UART for debug messages
    debugPrintConfigUart( UART_USB, 115200 );
    debugPrintlnString( "RTOS2 Clase2_TP1" );
 
-   /* Inicializacion de la Keys-Mef */
+   /* Inicializacion de la Keys-Mef. Inicializo las 4 teclas de la CIAA*/
    initKeysMef( 4, TEC1, TEC2, TEC3, TEC4 );
 
-   /* Inicializacion de los Leds    */
+   /* Inicializacion de los Leds. Inicializo dos leds de la CIAA*/
    Led_ctor(&led1, LED3 );
    Led_ctor(&led2, LED2 );
 
@@ -111,31 +114,34 @@ int main(void){
 
    // Crear tareas en freeRTOS
 
+   //Task: Maquina de estados y servicios de las teclas
    xTaskCreate(
-	  updKeysMef,                 // Funcion de la tarea a ejecutar
-      (const char *)"updKeysMef", // Nombre de la tarea como String amigable para el usuario
-      configMINIMAL_STACK_SIZE*2, // Cantidad de stack de la tarea
-      0,                          // Parametros de tarea
-      tskIDLE_PRIORITY+1,         // Prioridad de la tarea
-	  updKeysMef_Handle           // Puntero a la tarea creada en el sistema
+	  updKeysMef,
+      (const char *)"updKeysMef",
+      configMINIMAL_STACK_SIZE*2,
+      0,
+      tskIDLE_PRIORITY+1,
+	  updKeysMef_Handle
    );
 
+   //Task: servicio de parpadeo de leds
    xTaskCreate(
-	  myTaskLedPeriodico,         // Funcion de la tarea a ejecutar
-      (const char *)"myTaskLedPeriodico",    // Nombre de la tarea como String amigable para el usuario
-      configMINIMAL_STACK_SIZE*2, // Cantidad de stack de la tarea
-      0,                          // Parametros de tarea
-      tskIDLE_PRIORITY+1,         // Prioridad de la tarea
-	  myTaskLedPeriodicoHandle    // Puntero a la tarea creada en el sistema
+	  myTaskLedPeriodico,
+      (const char *)"myTaskLedPeriodico",
+      configMINIMAL_STACK_SIZE*2,
+      0,
+      tskIDLE_PRIORITY+1,
+	  myTaskLedPeriodicoHandle
    );
 
+   //Task: servico de recepcion e impresion de cola de mensajes
    xTaskCreate(
-	  myTaskToTextUART,         // Funcion de la tarea a ejecutar
-      (const char *)"myTaskToTextUART",    // Nombre de la tarea como String amigable para el usuario
-      configMINIMAL_STACK_SIZE*2, // Cantidad de stack de la tarea
-      0,                          // Parametros de tarea
-      tskIDLE_PRIORITY+1,         // Prioridad de la tarea
-	  myTaskToTextUARTHandle      // Puntero a la tarea creada en el sistema
+	  myTaskToTextUART,
+      (const char *)"myTaskToTextUART",
+      configMINIMAL_STACK_SIZE*2,
+      0,
+      tskIDLE_PRIORITY+1,
+	  myTaskToTextUARTHandle
    );
 
    myQueueCommandHandle = xQueueCreate( 6,  sizeof( void * ) );

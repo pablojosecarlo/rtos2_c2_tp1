@@ -1,9 +1,7 @@
-/* Copyright Pablo JC Alonso Castillo 2019.
+/* Copyright Pablo JC Alonso Castillo 2019-2020.
  * All rights reserved.
  *
- * Examen final PdM 10° Cohorte 2019
- *
- * Fecha: 2019-X-14
+ * Fecha: 2019-X-14, 2020-III-19
  */
 
 /*
@@ -185,6 +183,7 @@ void updKeysMef( void* );
 //void srvKeyMef( void (*f)( *void ), ... );
 
 //Nuestro caso particular . . la llamo desde updKeysMef
+//y en lugar de punteros a funciones, escribo los llamados en los sectores TO-DO
 static void srvKeysMef( void );
 
 

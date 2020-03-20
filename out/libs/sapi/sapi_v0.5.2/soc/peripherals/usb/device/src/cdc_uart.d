@@ -1,4 +1,4 @@
-examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/cdc_uart.o: \
+examples/c/app/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/cdc_uart.o: \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/src/cdc_uart.c \
  libs/lpc_open/boards/edu_ciaa_nxp/inc/board.h \
  libs/lpc_open/lpc_chip_43xx/inc/chip.h \
@@ -81,6 +81,7 @@ examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/soc/peripherals/usb/d
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/inc/cdc_uart.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/usb/device/inc/lpc_app_usbd_cfg.h \
  libs/sapi/sapi_v0.5.2/base/inc/sapi_datatypes.h \
+ libs/sapi/sapi_v0.5.2/board/inc/sapi_boards.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/inc/sapi_uart.h \
  libs/sapi/sapi_v0.5.2/abstract_modules/inc/sapi_delay.h \
  libs/sapi/sapi_v0.5.2/board/inc/sapi_peripheral_map.h

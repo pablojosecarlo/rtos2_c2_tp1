@@ -129,5 +129,5 @@ examples/c/app/out/examples/c/app/src/c2_tp1.o: \
  libs/sapi/sapi_v0.5.2/external_peripherals/imu/mpu60X0/inc/sapi_imu_mpu60X0.h \
  libs/sapi/sapi_v0.5.2/external_peripherals/memory/eeprom/inc/sapi_eeprom24xx1025.h \
  libs/sapi/sapi_v0.5.2/external_peripherals/ultrasonic/hcsr04/inc/sapi_ultrasonic_hcsr04.h \
- examples/c/app/inc/qmpool_Original.h examples/c/app/inc/c2_tp1.h \
+ examples/c/app/inc/c2_tp1.h examples/c/app/inc/qmpool2.h \
  examples/c/app/inc/leds.h

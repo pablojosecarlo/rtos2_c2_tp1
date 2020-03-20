@@ -1,13 +1,16 @@
 /*
- * qf_mem_Original.c
+ *  qf_mem2.c
  *
  *  Created on: Mar 17, 2020
- *      Author: pablo
+ *  Author: Quantum Leaps
+ *
+ *  La biblioteca original de QL es algo distinta y no tiene la funcion sPrint_Qmpool_Struct
+ *
  */
 
 #include <stdio.h>
 
-#include "../../app2/inc/qmpool_Original.h"
+#include "qmpool2.h"
 #include "FreeRTOS.h"
 
 void QMPool_init(QMPool * const me, void * const poolSto, uint_fast32_t poolSize, uint_fast16_t blockSize)
@@ -66,7 +69,7 @@ uint_fast16_t QMPool_getMin( QMPool * const me )
    return min;
 }
 
-char* Print_Qmpool_Struct(QMPool* Q,char* S)
+char* sPrint_Qmpool_Struct(QMPool* Q,char* S)
 {
    sprintf( S, "mem pool\r\n----------\r\n"
                "free_head   =%d\r\n"

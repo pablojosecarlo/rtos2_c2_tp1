@@ -15,8 +15,9 @@
 // sAPI
 #include "sapi.h"
 // otros includes
-#include "qmpool_Original.h"
 #include "c2_tp1.h"
+
+#include "qmpool2.h"
 #include "leds.h"
 
 /*==================[definiciones de datos internos]=========================*/
@@ -35,10 +36,11 @@ extern Led led1, led2;
 
 /*==========================[funciones]======================================*/
 
-
+//Task: servicio de parpadeo de leds
+//Enciende alternativamente led1 y led2
 void myTaskLedPeriodico( void* taskParmPtr )
 {
-   // Tarea periodica cada 1000 ms
+   // Tarea periodica cada 2000 ms
    portTickType xPeriodicity =  2000 / portTICK_RATE_MS;
    portTickType xLastWakeTime = xTaskGetTickCount();
 
@@ -53,7 +55,7 @@ void myTaskLedPeriodico( void* taskParmPtr )
      while(TRUE) {
 
 
-	   // Enciendo y apago los LEDs
+	   // Enciendo y apago los LEDs alternativamente
        Led_twist( &led1 );            //prendo <--> apago
        Led_twist( &led2 );            //apago  <--> prendo
 
@@ -79,12 +81,12 @@ void myTaskLedPeriodico( void* taskParmPtr )
 		   }
 		   //printf( "LED ON\r\n" );
 	   }
-	   //  Repetir por siempre, cada 1000 mSeg
+	   //  Repetir por siempre, cada 2000 mSeg
 	   vTaskDelayUntil( &xLastWakeTime, xPeriodicity );
    }
 };
 
-
+//Task: servico de recepcion e impresion de cola de mensajes
 void myTaskToTextUART( void* taskParmPtr )
 {
 	void * ptrR;
@@ -102,7 +104,7 @@ void myTaskToTextUART( void* taskParmPtr )
 	}
 };
 
-//void uint16ToAscii (int valor)
+//Separa los digitos de un uint16_t y los guarda en el arreglo publico NUM[]
 void uint16ToAscii (uint16_t valor)
 {
 	union
@@ -115,7 +117,8 @@ void uint16ToAscii (uint16_t valor)
 	BIN16_A_DIGITAL5(unionX.sector[1], unionX.sector[0]);	//CONVIERTE HADD Y LADD A NUM[4] -> NUM[0]
 }
 
-//void BIN16_A_DIGITAL5(char HADD, char LADD){
+//Toma dos bites que forman un numero de 16 bits y lo convierte en digitos
+//que guarda en el arreglo publico NUM[]
 void BIN16_A_DIGITAL5(uint8_t HADD, uint8_t LADD){
 
 //convierte un uint_16 formando por dos mitades uint8_t en dígitos ascii que guarda en el arreglo NUM[5]

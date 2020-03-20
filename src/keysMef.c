@@ -14,9 +14,9 @@
 // sAPI
 #include "sapi.h"
 // otros includes
-#include "qmpool_Original.h"
 #include "c2_tp1.h"
 #include "keysMef.h"
+#include "qmpool2.h"
 
 // Definidas externamente
 extern QueueHandle_t myQueueCommandHandle;
@@ -224,7 +224,6 @@ void updKeysMef( void* taskParmPtr ){
 // Como demo mando al serie un string con los estados y eventos activados por las teclas/botones/pulsadores
 //
 /*------------------------------------------------------------------------------------------------------------- */
-//void srvKeysMef( void* taskParmPtr ){
 void srvKeysMef( void ){
 	// Como los estados KEY_ARR_LONG y KEY_ABA_LONG son estacionarios, no permito que se los llame consecutivamente
 	// para eso defino bKEY_ABA_LONG[] y bKEY_ARR_LONG[]. Estos arreglos guardan si los estados se usaron en el
@@ -248,8 +247,9 @@ void srvKeysMef( void ){
 				//LED_DEBUG( (LEDB + i, OFF ) );
 				PRINT_DEBUG( ("KEY_ARR_SHORT: \t key: %i \t gpio: %i\n", i, teclas[i].tecla ) );
 			    //TO-DO
+
 				//preparo para enviar
-				uint16ToAscii( teclas[i].tiempoDOWN );					//convierto el tiempo en digitos
+				uint16ToAscii( (uint16_t)teclas[i].tiempoDOWN );					//convierto el tiempo en digitos
 
 				//ptr = pvPortMalloc(11);
 				ptr = QMPool_get( &miMemPool1, 4 );		// 4 bloques de 5 bytes
@@ -258,7 +258,7 @@ void srvKeysMef( void ){
 					  *( ( char * ) ptr + 0 ) = 'T';
 					  *( ( char * ) ptr + 1 ) = 'E';
 					  *( ( char * ) ptr + 2 ) = 'C';
-					  *( ( char * ) ptr + 3 ) =  i + 48; 			//pongo el N° de tecla
+					  *( ( char * ) ptr + 3 ) =  i + 48; 		//pongo el N° de tecla
 					  *( ( char * ) ptr + 4 ) = ' ';
 					  *( ( char * ) ptr + 5 ) = 'T';
 					  *( ( char * ) ptr + 6 ) = NUM[3] + 48;	//pongo los dígitos como ASCII
@@ -272,6 +272,7 @@ void srvKeysMef( void ){
 				}else{
 					 // Falla alocacion de memoria;
 				}
+
 				break;
 
 			case KEY_ARR_LONG:

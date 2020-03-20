@@ -34,6 +34,7 @@ bool_t Led_getBlink( Led * const me ){
 	   return me->ledBlink;
 };
 
+//Invierte el estado del atributo ledOnOff si el atributo ledBlink esta en ON
 void   Led_twist( Led * const me){
 	if( me->ledBlink )
 		Led_setOnOff( me, !(me->ledOnOff) );

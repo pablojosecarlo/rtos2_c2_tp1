@@ -5,13 +5,10 @@
  *      Author: pablo
  */
 
-#ifndef EXAMPLES_C_APP2_INC_QMPOOL_ORIGINAL_H_
-#define EXAMPLES_C_APP2_INC_QMPOOL_ORIGINAL_H_
+#ifndef EXAMPLES_C_APP2_INC_QMPOOL2_H_
+#define EXAMPLES_C_APP2_INC_QMPOOL2_H_
 
 #include "sapi.h"
-
- //#ifndef QMPOOL_H
- //#define QMPOOL_H
 
  //structure representing a free block in the Native QF Memory Pool */
 typedef struct QFreeBlock {
@@ -73,4 +70,4 @@ char *         Print_Qmpool_Struct ( QMPool * Q        ,char * S                
  //#endif /* QMPOOL_H */
 
 
-#endif /* EXAMPLES_C_APP2_INC_QMPOOL_ORIGINAL_H_ */
+#endif /* EXAMPLES_C_APP2_INC_QMPOOL2_H_ */

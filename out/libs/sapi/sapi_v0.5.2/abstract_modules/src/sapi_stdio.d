@@ -1,4 +1,4 @@
-examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/abstract_modules/src/sapi_stdio.o: \
+examples/c/app/out/libs/sapi/sapi_v0.5.2/abstract_modules/src/sapi_stdio.o: \
  libs/sapi/sapi_v0.5.2/abstract_modules/src/sapi_stdio.c \
  libs/sapi/sapi_v0.5.2/abstract_modules/inc/sapi_stdio.h \
  libs/sapi/sapi_v0.5.2/base/inc/sapi.h \
@@ -66,6 +66,7 @@ examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/abstract_modules/src/
  libs/lpc_open/boards/edu_ciaa_nxp/inc/board.h \
  libs/lpc_open/boards/inc/board_api.h \
  libs/lpc_open/lpc_chip_43xx/inc/lpc_types.h \
+ libs/sapi/sapi_v0.5.2/board/inc/sapi_boards.h \
  libs/sapi/sapi_v0.5.2/board/inc/sapi_peripheral_map.h \
  libs/sapi/sapi_v0.5.2/base/inc/sapi_datatypes.h \
  libs/sapi/sapi_v0.5.2/board/inc/sapi_board.h \
@@ -106,14 +107,17 @@ examples_c/sapi/gpio/TP_PdM_10Ch/out/libs/sapi/sapi_v0.5.2/abstract_modules/src/
  libs/sapi/sapi_v0.5.2/abstract_modules/inc/sapi_convert.h \
  libs/sapi/sapi_v0.5.2/soc/peripherals/inc/sapi_pwm.h \
  libs/sapi/sapi_v0.5.2/abstract_modules/inc/sapi_circularBuffer.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_7_segment_display.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_keypad.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_dht11.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_lcd.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_servo.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_rgb.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_esp8266.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_magnetometer_hmc5883l.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_magnetometer_qmc5883l.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_imu_mpu9250.h \
- libs/sapi/sapi_v0.5.2/external_peripherals/inc/sapi_ultrasonic_hcsr04.h
+ libs/sapi/sapi_v0.5.2/abstract_modules/inc/sapi_button.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/display/led_segments/7segment/inc/sapi_7_segment_display.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/keypad/inc/sapi_keypad.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/temperature_humudity/dht11/inc/sapi_dht11.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/display/lcd/inc/sapi_lcd.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/motor/servo/inc/sapi_servo.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/led_rgb/inc/sapi_rgb.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/wifi/esp8266_at/inc/sapi_esp8266.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/magnetometer/hmc5883l/inc/sapi_magnetometer_hmc5883l.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/magnetometer/qmc5883l/inc/sapi_magnetometer_qmc5883l.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/imu/mpu9250/inc/sapi_imu_mpu9250.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/imu/mpu60X0/inc/sapi_imu_mpu60X0.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/memory/eeprom/inc/sapi_eeprom24xx1025.h \
+ libs/sapi/sapi_v0.5.2/external_peripherals/ultrasonic/hcsr04/inc/sapi_ultrasonic_hcsr04.h
