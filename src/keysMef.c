@@ -7,6 +7,8 @@
 
 /*==================[inclusions]=============================================*/
 
+#include "QueueToUART.h"
+
 #include "FreeRTOSConfig.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -15,13 +17,11 @@
 #include "sapi.h"
 // otros includes
 #include "c2_tp1.h"
+
 #include "keysMef.h"
-#include "qmpool2.h"
+
 
 // Definidas externamente
-extern QueueHandle_t myQueueCommandHandle;
-extern QMPool miMemPool1;
-extern uint8_t memPoolSto1[];
 extern int8_t  NUM[5];
 
 // Unidades de Tiempo Mínimo para estados y eventos
@@ -251,27 +251,21 @@ void srvKeysMef( void ){
 				//preparo para enviar
 				uint16ToAscii( (uint16_t)teclas[i].tiempoDOWN );					//convierto el tiempo en digitos
 
-				//ptr = pvPortMalloc(11);
-				ptr = QMPool_get( &miMemPool1, 4 );		// 4 bloques de 5 bytes
+				uint8_t elMsj[11];
 
-				if ( ptr ){
-					  *( ( char * ) ptr + 0 ) = 'T';
-					  *( ( char * ) ptr + 1 ) = 'E';
-					  *( ( char * ) ptr + 2 ) = 'C';
-					  *( ( char * ) ptr + 3 ) =  i + 48; 		//pongo el N° de tecla
-					  *( ( char * ) ptr + 4 ) = ' ';
-					  *( ( char * ) ptr + 5 ) = 'T';
-					  *( ( char * ) ptr + 6 ) = NUM[3] + 48;	//pongo los dígitos como ASCII
-					  *( ( char * ) ptr + 7 ) = NUM[2] + 48;
-					  *( ( char * ) ptr + 8 ) = NUM[1] + 48;
-					  *( ( char * ) ptr + 9 ) = NUM[0] + 48;
-					  *( ( char * ) ptr + 10) =  0 ;
+			    elMsj[ 0 ] = 't';
+			    elMsj[ 1 ] = 'e';
+			    elMsj[ 2 ] = 'c';
+			    elMsj[ 3 ] =  1 + 48;
+			    elMsj[ 4 ] = ' ';
+			    elMsj[ 5 ] = 't';
+			    elMsj[ 6 ] = NUM[3] + 48;	//pongo los dígitos como ASCII
+			    elMsj[ 7 ] = NUM[2] + 48;
+			    elMsj[ 8 ] = NUM[1] + 48;
+			    elMsj[ 9 ] = NUM[0] + 48;
+			    elMsj[ 10] =  0;
 
-					  xQueueSend( myQueueCommandHandle, &ptr,  (TickType_t) 1);  //mando el puntero
-
-				}else{
-					 // Falla alocacion de memoria;
-				}
+			    sendQueueToUART( elMsj );
 
 				break;
 

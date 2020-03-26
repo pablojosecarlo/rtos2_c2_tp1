@@ -1,5 +1,7 @@
 examples/c/app/out/examples/c/app/src/keysMef.o: \
- examples/c/app/src/keysMef.c examples/c/app/inc/FreeRTOSConfig.h \
+ examples/c/app/src/keysMef.c examples/c/app/inc/QueueToUART.h \
+ libs/sapi/sapi_v0.5.2/base/inc/sapi.h \
+ libs/sapi/sapi_v0.5.2/base/inc/sapi_datatypes.h \
  libs/lpc_open/lpc_chip_43xx/inc/chip.h \
  libs/lpc_open/lpc_chip_43xx/inc/sys_config.h \
  libs/lpc_open/lpc_chip_43xx/inc/cmsis.h \
@@ -60,16 +62,6 @@ examples/c/app/out/examples/c/app/src/keysMef.o: \
  libs/lpc_open/lpc_chip_43xx/inc/iap_18xx_43xx.h \
  libs/lpc_open/lpc_chip_43xx/inc/error.h \
  libs/lpc_open/lpc_chip_43xx/inc/i2cm_18xx_43xx.h \
- libs/freertos/include/FreeRTOS.h \
- libs/freertos/include/../../../examples/c/app_retocada/inc/FreeRTOSConfig.h \
- libs/freertos/include/private/projdefs.h \
- libs/freertos/include/private/portable.h \
- libs/freertos/include/private/deprecated_definitions.h \
- libs/freertos/source/portable/ARM_CM4F/portmacro.h \
- libs/freertos/include/private/mpu_wrappers.h \
- libs/freertos/include/task.h libs/freertos/include/private/list.h \
- libs/freertos/include/queue.h libs/sapi/sapi_v0.5.2/base/inc/sapi.h \
- libs/sapi/sapi_v0.5.2/base/inc/sapi_datatypes.h \
  libs/lpc_open/boards/edu_ciaa_nxp/inc/board.h \
  libs/lpc_open/boards/inc/board_api.h \
  libs/lpc_open/lpc_chip_43xx/inc/lpc_types.h \
@@ -129,5 +121,13 @@ examples/c/app/out/examples/c/app/src/keysMef.o: \
  libs/sapi/sapi_v0.5.2/external_peripherals/imu/mpu60X0/inc/sapi_imu_mpu60X0.h \
  libs/sapi/sapi_v0.5.2/external_peripherals/memory/eeprom/inc/sapi_eeprom24xx1025.h \
  libs/sapi/sapi_v0.5.2/external_peripherals/ultrasonic/hcsr04/inc/sapi_ultrasonic_hcsr04.h \
- examples/c/app/inc/c2_tp1.h examples/c/app/inc/keysMef.h \
- examples/c/app/inc/qmpool2.h
+ examples/c/app/inc/FreeRTOSConfig.h libs/freertos/include/FreeRTOS.h \
+ libs/freertos/include/../../../examples/c/app_retocada/inc/FreeRTOSConfig.h \
+ libs/freertos/include/private/projdefs.h \
+ libs/freertos/include/private/portable.h \
+ libs/freertos/include/private/deprecated_definitions.h \
+ libs/freertos/source/portable/ARM_CM4F/portmacro.h \
+ libs/freertos/include/private/mpu_wrappers.h \
+ libs/freertos/include/task.h libs/freertos/include/private/list.h \
+ libs/freertos/include/queue.h examples/c/app/inc/c2_tp1.h \
+ examples/c/app/inc/keysMef.h

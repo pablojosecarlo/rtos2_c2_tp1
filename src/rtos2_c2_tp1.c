@@ -34,6 +34,8 @@
 
 /*==================[inclusions]=============================================*/
 
+#include "QueueToUART.h"
+
 #include "FreeRTOSConfig.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -69,14 +71,7 @@ DEBUG_PRINT_ENABLE;
 
 TaskHandle_t updKeysMef_Handle = NULL;
 TaskHandle_t myTaskLedPeriodicoHandle = NULL;
-TaskHandle_t myTaskToTextUARTHandle = NULL;
-
-QueueHandle_t myQueueCommandHandle = NULL;
-
-/*==================[Declaraciones y variables asociadas al Quantum Leaps Mem Pool]=========*/
-
-QMPool miMemPool1;
-uint8_t memPoolSto1[10*5]; // 10 bloques de 5 bytes
+TaskHandle_t updQueueToUARTHandle =  NULL;
 
 /*==================[Declaraciones y variables asociadas al Objeto Led]=========*/
 
@@ -92,22 +87,19 @@ int main(void){
    /* Inicializar la placa */
    boardConfig();
 
-   // Inicializar Pool de memoria Quantum Leaps
-   QMPool_init(&miMemPool1,
-               memPoolSto1,
-               sizeof(memPoolSto1),
-               5U);  /* bloques 5 bytes cada uno */
-
    // Inicializar UART for debug messages
    debugPrintConfigUart( UART_USB, 115200 );
    debugPrintlnString( "RTOS2 Clase2_TP1" );
 
-   /* Inicializacion de la Keys-Mef. Inicializo las 4 teclas de la CIAA*/
+   /* Inicialización de la Keys-Mef. Inicializo las 4 teclas de la CIAA*/
    initKeysMef( 4, TEC1, TEC2, TEC3, TEC4 );
 
-   /* Inicializacion de los Leds. Inicializo dos leds de la CIAA*/
+   /* Inicialización de los Leds. Inicializo dos leds de la CIAA*/
    Led_ctor(&led1, LED3 );
    Led_ctor(&led2, LED2 );
+
+   /* Inicialización de las comunicaciones con la UART */
+   initQueueToUART( 100 );
 
    // Led para dar señal de vida
    gpioWrite( LEDB, ON );
@@ -134,17 +126,16 @@ int main(void){
 	  myTaskLedPeriodicoHandle
    );
 
-   //Task: servico de recepcion e impresion de cola de mensajes
+   //Task: servicio de recepción e impresion de cola de mensajes
    xTaskCreate(
-	  myTaskToTextUART,
-      (const char *)"myTaskToTextUART",
+	  updQueueToUART,
+      (const char *)"updQueueToUART",
       configMINIMAL_STACK_SIZE*2,
       0,
       tskIDLE_PRIORITY+1,
-	  myTaskToTextUARTHandle
+	  updQueueToUARTHandle
    );
 
-   myQueueCommandHandle = xQueueCreate( 6,  sizeof( void * ) );
 
    // Iniciar scheduler
    vTaskStartScheduler();

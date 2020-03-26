@@ -17,8 +17,10 @@
 // otros includes
 #include "c2_tp1.h"
 
-#include "qmpool2.h"
+#include "QueueToUART.h"
+
 #include "leds.h"
+
 
 /*==================[definiciones de datos internos]=========================*/
 
@@ -28,9 +30,6 @@ int8_t  NUM[5] = { 0, 0, 0, 0, 0 };   //arreglo para guardar los dígitos del ti
 
 //Definida externamente
 extern QueueHandle_t myQueueCommandHandle;
-
-extern QMPool miMemPool1;
-extern uint8_t memPoolSto1[];
 
 extern Led led1, led2;
 
@@ -45,6 +44,8 @@ void myTaskLedPeriodico( void* taskParmPtr )
    portTickType xLastWakeTime = xTaskGetTickCount();
 
    void *ptr = NULL;
+   void *ptr2 = NULL;
+   uint8_t elMsj[7];
 
    Led_setBlink( &led1, ON);  //habilito el blinking
    Led_setBlink( &led2, ON);  //habilito el blinking
@@ -61,24 +62,16 @@ void myTaskLedPeriodico( void* taskParmPtr )
 
        if( Led_getOnOff( &led1) ){    //Si esta prendido . . .
 
-    	   //ptr = pvPortMalloc( 7 );
-		   ptr = QMPool_get( &miMemPool1, 2 );		// 2 bloques de 5 bytes
+		   elMsj[ 0 ] = 'l';
+		   elMsj[ 1 ] = 'e';
+		   elMsj[ 2 ] = 'd';
+		   elMsj[ 3 ] = ' ';
+		   elMsj[ 4 ] = 'o';
+		   elMsj[ 5 ] = 'n';
+		   elMsj[ 6 ] =  0 ;
 
-	 	   if (ptr){
+		   sendQueueToUART( elMsj );
 
-	 		    *( ( char * ) ptr + 0 ) = 'L';
-				*( ( char * ) ptr + 1 ) = 'E';
-				*( ( char * ) ptr + 2 ) = 'D';
-				*( ( char * ) ptr + 3 ) = ' ';
-				*( ( char * ) ptr + 4 ) = 'O';
-				*( ( char * ) ptr + 5 ) = 'N';
-				*( ( char * ) ptr + 6 ) =  0 ;
-
-				xQueueSend( myQueueCommandHandle, &ptr,  (TickType_t) 100);
-
-		   }else{
-			   //Falla alocacion de memoria
-		   }
 		   //printf( "LED ON\r\n" );
 	   }
 	   //  Repetir por siempre, cada 2000 mSeg
@@ -86,23 +79,6 @@ void myTaskLedPeriodico( void* taskParmPtr )
    }
 };
 
-//Task: servico de recepcion e impresion de cola de mensajes
-void myTaskToTextUART( void* taskParmPtr )
-{
-	void * ptrR;
-
-	while (1){
-		if ( xQueueReceive( myQueueCommandHandle, &ptrR, 1000 / portTICK_RATE_MS ) ){
-			printf( "Recibido: %s\n", ptrR );
-
-			//vPortFree(ptrR);
-			QMPool_put( &miMemPool1, ptrR );
-		}
-		else {
-			//puts( "falla al recibir dato del queue" );
-		}
-	}
-};
 
 //Separa los digitos de un uint16_t y los guarda en el arreglo publico NUM[]
 void uint16ToAscii (uint16_t valor)
